@@ -1,0 +1,25 @@
+{
+  "name": "sprinklr-app-starter-kit",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/palash0109/Sprinklr-App-Starter-kit.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/palash0109/Sprinklr-App-Starter-kit/issues"
+  },
+  "homepage": "https://github.com/palash0109/Sprinklr-App-Starter-kit#readme",
+  "dependencies": {
+    "commander": "^7.2.0",
+    "fs": "^0.0.1-security",
+    "fs-extra": "^9.1.0",
+    "path": "^0.12.7"
+  }
+}
