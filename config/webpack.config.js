@@ -1,6 +1,6 @@
 const path = require("path");
 const webpack  = require("webpack");
-// const HtmlWebpackPlugin = require("html-webpack-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { merge } = require('webpack-merge');
 const fs = require('fs');
 
@@ -24,13 +24,13 @@ module.exports = merge(
     },
     module: {
         rules: [
-            // {
-            //     test: /.js$/,
-            //     exclude: /node_modules/,
-            //     use: {
-            //         loader: 'babel-loader'
-            //     }
-            // },
+            {
+                test: /.js$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: 'babel-loader'
+                }
+            },
             {
                 test: /\.css$/i,
                 use: ['style-loader', 'css-loader'],
@@ -42,15 +42,15 @@ module.exports = merge(
         ]
     },
     plugins : [
-        // new HtmlWebpackPlugin({
-        //      template: './src/index.html'
-        // }),
+        new HtmlWebpackPlugin({
+             template: './src/index.html'
+        }),
 
         new webpack.HotModuleReplacementPlugin(),
 
     ],
     devServer: {
-        // historyApiFallback: true,
+        historyApiFallback: true,
         open: true,
         hot: true
     }
