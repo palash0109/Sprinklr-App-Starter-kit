@@ -16,7 +16,6 @@ You don’t need to install or configure tools like webpack ,babel, prettier or 
 
 >Create a project, and you’re good to go.
 
----
 
 ## Creating an App
 
@@ -63,7 +62,6 @@ npm run build
 ```
 
 ## Custom Tempalte Support
----
 
 Custom Templates enable you to select a template to create your project from, while still retaining all of the features of Create Spr App.
 
