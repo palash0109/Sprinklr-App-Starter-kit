@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/palash0109/Sprinklr-App-Starter-kit#readme",
   "dependencies": {
+    "chalk": "^4.1.0",
     "commander": "^7.2.0",
     "cross-spawn": "^7.0.3",
     "fs": "^0.0.1-security",

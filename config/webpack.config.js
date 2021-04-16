@@ -1,22 +1,36 @@
 const path = require("path");
 const webpack  = require("webpack");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+// const HtmlWebpackPlugin = require("html-webpack-plugin");
+const { merge } = require('webpack-merge');
+const fs = require('fs');
 
-module.exports = {
+let sprConfig;
+
+if(fs.existsSync('./spr.config.js')) {
+    sprConfig = require('./spr.config')
+}
+else{
+    sprConfig = {}
+}
+
+module.exports = merge(
+    sprConfig, 
+    {
     entry: './src/index.js',
     output: {
         path: path.join(__dirname, 'dist'),
-        filename: 'index_bundle.js'
+        filename: 'index_bundle.js',
+        publicPath: '/'
     },
     module: {
         rules: [
-            {
-                test: /.js$/,
-                exclude: /node_modules/,
-                use: {
-                    loader: 'babel-loader'
-                }
-            },
+            // {
+            //     test: /.js$/,
+            //     exclude: /node_modules/,
+            //     use: {
+            //         loader: 'babel-loader'
+            //     }
+            // },
             {
                 test: /\.css$/i,
                 use: ['style-loader', 'css-loader'],
@@ -28,15 +42,16 @@ module.exports = {
         ]
     },
     plugins : [
-        new HtmlWebpackPlugin({
-             template: './src/index.html'
-        }),
+        // new HtmlWebpackPlugin({
+        //      template: './src/index.html'
+        // }),
 
         new webpack.HotModuleReplacementPlugin(),
 
     ],
     devServer: {
+        // historyApiFallback: true,
         open: true,
         hot: true
     }
-}
+})
