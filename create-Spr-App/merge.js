@@ -1,6 +1,7 @@
 const fs = require('fs-extra');
 const os = require('os');
 const path = require('path');
+let { dependencies } = require('./const')
 
 
 function merge(appPath, templatePath)
@@ -40,6 +41,22 @@ function merge(appPath, templatePath)
         JSON.stringify(appPackage, null, 2) + os.EOL
       );
 
+
+
+
+      const dependenciesToInstall = Object.entries({
+        ...templateJson.dependencies,
+        ...templateJson.devDependencies,
+      });
+      if (dependenciesToInstall.length) {
+        dependencies = dependencies.concat(
+          dependenciesToInstall.map(([dependency, version]) => {
+            return `${dependency}@${version}`;
+          })
+        );
+      }
+
+      return dependencies;
     
 }
 

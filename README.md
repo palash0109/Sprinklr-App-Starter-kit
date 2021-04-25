@@ -1,6 +1,6 @@
 # Sprinklr-App-Starter-kit
 
-<img alt="Logo" align="right" src="./src/sprlogo.png" width="20%" />
+<img alt="Logo" align="right" style="margin-top: 20px;" src="./src/sprlogo.svg" width="18%" />
 
 ## Quick Overview
 ```sh

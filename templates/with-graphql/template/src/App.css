@@ -1,0 +1,12 @@
+.App{
+    text-align: center;
+    margin-top: 15px;
+}
+.App .App-header{
+    font-size: 3em;
+    margin-top: 40px;
+}
+
+.App-logo{
+    height: 40vmin;
+}

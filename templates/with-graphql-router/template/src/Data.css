@@ -1,0 +1,22 @@
+.data table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 50%;
+  margin: auto;   
+  text-align: center;
+}
+.data h1{
+  text-align: center;
+  margin-top: 5%;
+}
+.data th{
+    font-size: 1.3rem;
+}
+.data td, th {
+  border: 1px solid #dddddd;
+  padding: 8px;
+}
+
+.data tr:nth-child(even) {
+  background-color: #dddddd;
+}

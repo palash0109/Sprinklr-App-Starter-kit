@@ -1,0 +1,21 @@
+.data table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 50%;
+    margin: auto;   
+    text-align: center;
+  }
+  .data h2{
+    margin-top: 40px;
+  }
+  .data th{
+      font-size: 1.3rem;
+  }
+  .data td, th {
+    border: 1px solid #dddddd;
+    padding: 8px;
+  }
+  
+  .data tr:nth-child(even) {
+    background-color: #dddddd;
+  }

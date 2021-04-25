@@ -5,8 +5,8 @@ const path = require('path');
 const spawn = require('cross-spawn');
 const chalk = require('chalk')
 const { option } = require('commander');
-const { install } = require('./helper/install')
-const { merge } = require('./helper/merge')
+const { install } = require('./install')
+const { merge } = require('./merge')
 
 
 let projectName;
@@ -15,15 +15,23 @@ async function init() {
     const program = new commander.Command('create-spr-app')
         .version('1.0.0')
         .arguments('<project-directory>')
+        .usage(`${chalk.green('<project-directory>')} [options]`)
         .action((name, options, command) => {
             projectName = name;
         })
         .option(
             '--template <path-to-template>',
-            'specify the template dir path for your project'
+            'specify a template for the created project'
           )
         .allowUnknownOption()
+        .on('--help', () => {
+            console.log(`\n   A custom ${chalk.cyan('--template')} should be:`);
+            console.log(`    - a local path relative to current working directory: ${chalk.green('file:../my-custom-template')}`);
+            console.log(`    - click the link below for more info about the format of custom-template`);
+            console.log(`      ${chalk.cyan(`https://github.com/palash0109/Sprinklr-App-Starter-kit#custom-tempalte-support`)}\n`);
+        })
         .parse(process.argv)
+
 
     if(typeof projectName === 'undefined')
     {
@@ -42,7 +50,8 @@ async function init() {
         process.exit(1);
     }
 
-    let templatePath;
+    let templatePath = path.join(__dirname, "../templates/default-template");
+
     if(options.template)
     {
         templatePath = path.resolve(options.template)
@@ -64,7 +73,6 @@ async function init() {
 
 
     const packagePath = path.join(root, "package.json"); //root + package.json
-    const srcPath = path.join(root, "src");
     const appName = path.basename(root);
 
     const packageJson = {
@@ -75,78 +83,60 @@ async function init() {
             start: "webpack serve --mode development --open --hot",
             build: "webpack --mode production"
           },
+        husky: {
+            hooks: {
+              "pre-commit": "lint-staged"
+            }
+          },
+        "lint-staged": {
+            "./src/*.{js,jsx,ts,tsx}": [
+              "npx prettier --write",
+              "eslint src/*.js --fix-dry-run",
+            ]
+          }
       };
 
     // make package.json
     fs.writeFileSync(packagePath, JSON.stringify(packageJson, null, 2) + os.EOL); 
 
     // copy the config files to root of package
-    fs.copySync(path.join(__dirname, "config"), root); 
+    fs.copySync(path.join(__dirname, "../config"), root); 
 
-    if(options.template)
-    {
 
-        const templateDir = path.join(templatePath, 'template');
+    const templateDir = path.join(templatePath, 'template');
 
-        //copy the template dir to the root 
-        if (fs.existsSync(templateDir)) {
+    //copy the template dir to the root 
+    if (fs.existsSync(templateDir)) {
 
-          console.log();
-          console.log(`Copying the template files into your ${chalk.cyan(projectName)} directory. This might take a moment.`)
-          console.log();
-          fs.copySync(templateDir, root);
+      console.log(`\nCopying the template files into your ${chalk.cyan(projectName)} directory. This might take a moment.\n`)
+      fs.copySync(templateDir, root);
 
-        } else {
+    } else {
 
-          console.error(
-            chalk.red(`Could not locate supplied template.`)
-          );
-          return;
-        }
-
-        
-        //merge the template.json with the appPackage
-        await merge(root, templatePath);
-
-        process.chdir(root);
-
-        console.log(chalk.cyan('Installing packages. This might take a couple of minutes.'))
-        console.log();
-
-        //installing dependencies
-        await install(templatePath);
-    }else{
-
-        // make src directory
-        fs.mkdirSync(srcPath); 
-
-        console.log(`Copying the default template files into your ${chalk.cyan(projectName)} directory. This might take a moment.`)
-        console.log();
-
-        //copying the default template files to the src directory
-        fs.copySync(path.join(__dirname, "src"), srcPath);
-        
-        process.chdir(root);
-
-        console.log(chalk.cyan('Installing packages. This might take a couple of minutes.'))
-        console.log();
-
-        //installing dependecies
-        await install(null);
+      console.error(
+        chalk.red(`Could not locate supplied template.`)
+      );
+      return;
     }
+
+    //merge the template.json with the appPackage
+    const dependencies = await merge(root, templatePath);
+
+    process.chdir(root);
+
+    console.log(chalk.cyan('Installing packages. This might take a couple of minutes.\n'))
+
+    //installing dependencies
+    await install(dependencies);
+
     
-    console.log();
-    console.log(`${chalk.green('Success!')} Created ${projectName}`);
-    console.log('Inside that directory, you can run several commands');
-    console.log();
-    console.log('We suggest that you begin by typing:');
-    console.log();
+    console.log(`\n${chalk.green('Success!')} Created ${projectName}`);
+    console.log('Inside that directory, you can run several commands\n');
+    console.log('We suggest that you begin by typing:\n');
     console.log(chalk.cyan('  cd'), projectName);
-    console.log(`  ${chalk.cyan(`npm start`)}`);
-    console.log();
+    console.log(`  ${chalk.cyan(`npm start`)}\n`);
     console.log(`Happy Coding!`);
-    console.log('\u00a9 sprinklr');
-    console.log();
+    console.log('\u00a9 sprinklr\n');
 
 }
 
@@ -154,6 +144,20 @@ async function init() {
 module.exports = {
     init
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 // 'eslint-config-react-app', 

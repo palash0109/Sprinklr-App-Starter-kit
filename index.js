@@ -1,5 +1,5 @@
 #!/usr/bin/env node
 
-const { init } = require('./createSprApp');
+const { init } = require('./create-Spr-App/createSprApp');
 
 init();
