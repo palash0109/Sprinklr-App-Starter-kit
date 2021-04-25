@@ -1,6 +1,6 @@
 # Sprinklr-App-Starter-kit
 
-<img alt="Logo" align="right" style="margin-top: 20px;" src="./templates/default-template/template/src/sprlogo.svg" width="18%" />
+<img alt="Logo" align="right" style="margin-top: 30px;" src="./templates/default-template/template/src/sprlogo.svg" width="18%" />
 
 ## Quick Overview
 ```sh
@@ -31,16 +31,21 @@ my-spr-app
 ├── README.md
 ├── node_modules
 ├── package.json
-├──.babelrc
-├──.eslintrc.json
-├──.prettierrc.json
-├──webpack.config.json
+├── .babelrc
+├── .eslintrc.json
+├── .prettierrc.json
+├── tsconfig.json
+├── webpack.base.config.json
+├── webapack.config.js
 ├── .gitignore
+├── ts-typing
+    └── global.d.ts
 └── src
     ├── App.css
-    ├── App.js
-    ├── index.js
-    └── sprlogo.png
+    ├── App.tsx
+    ├── index.html
+    ├── index.tsx
+    └── sprlogo.svg
 ```
 
 Once the installation is done, you can open your project folder:
@@ -71,12 +76,12 @@ A template must have the following structure:
 
 ```
 my-spr-template
-├── webpack-template.config.js
 ├── template.json
 ├── template
+    ├── webpack.custom.config.js
     └── src
         ├── App.css
         ├── App.js
-        ├── index.js
-        └── sprlogo.png
+        ├── index.html
+        └── index.js
 ```
