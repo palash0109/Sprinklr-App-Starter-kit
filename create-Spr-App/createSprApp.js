@@ -20,8 +20,12 @@ async function init() {
             projectName = name;
         })
         .option(
-            '--template <path-to-template>',
+            '-t, --template <path-to-template>',
             'specify a template for the created project'
+          )
+        .option(
+          '-d, --default <name-of-template>',
+          'specify a name of the default templates provided '
           )
         .allowUnknownOption()
         .on('--help', () => {
@@ -59,6 +63,16 @@ async function init() {
         if(!fileExists)
         {
             console.error(chalk.red("Incorrect template directory path, please provide a correct path to template."));
+            process.exit(1);
+        }
+    }
+    if(options.default)
+    {
+        templatePath = path.join(__dirname, `../templates/${options.default}`);
+        const fileExists = fs.existsSync(templatePath)
+        if(!fileExists)
+        {
+            console.error(chalk.red("Incorrect template name, please provide a correct name of template."));
             process.exit(1);
         }
     }
@@ -151,39 +165,3 @@ module.exports = {
 
 
 
-
-
-
-
-
-
-
-
-
-// 'eslint-config-react-app', 
-// '@typescript-eslint/eslint-plugin@^4.0.0', 
-// '@typescript-eslint/parser@^4.0.0', 
-// '@babel/eslint-parser', 
-// 'eslint@^7.5.0', 
-// 'eslint-plugin-flowtype@^5.2.0', 
-// 'eslint-plugin-import@^2.22.0',
-// 'eslint-plugin-jsx-a11y@^6.3.1',
-// 'eslint-plugin-react@^7.20.3',
-// 'eslint-plugin-react-hooks@^4.0.8',
-// 'eslint-config-prettier', 
-// 'eslint-plugin-prettier',
-// 'prettier',
-// '@babel/core',
-// '@babel/preset-env',
-// '@babel/preset-react',
-// 'babel-loader',
-// 'babel-plugin-transform-class-properties',
-// 'babel-plugin-transform-es2015-modules-commonjs',
-// 'babel-preset-env',
-// 'babel-preset-react',
-// 'html-webpack-plugin',
-// 'webpack',
-// 'webpack-cli',
-// 'webpack-dev-server',
-// 'style-loader',
-// 'css-loader'

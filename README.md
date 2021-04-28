@@ -16,6 +16,16 @@ You don’t need to install or configure tools like webpack ,babel, prettier or 
 
 >Create a project, and you’re good to go.
 
+## What's Included?
+- Babel loader
+- Prettier
+- Eslint
+- Typescript
+- React
+- Compression plugins
+- Prod build scripts
+- Pre-commit hooks
+
 
 ## Creating an App
 
@@ -36,7 +46,7 @@ my-spr-app
 ├── .prettierrc.json
 ├── tsconfig.json
 ├── webpack.base.config.json
-├── webapack.config.js
+├── webpack.config.js
 ├── .gitignore
 ├── ts-typing
     └── global.d.ts
@@ -66,7 +76,11 @@ Builds the app for production.
 npm run build
 ```
 
-## Custom Tempalte Support
+## Custom Template Support
+
+```sh
+npx create-spr-app my-app --template file:../path/to/your/template
+``` 
 
 Custom Templates enable you to select a template to create your project from, while still retaining all of the features of Create Spr App.
 
@@ -84,4 +98,53 @@ my-spr-template
         ├── App.js
         ├── index.html
         └── index.js
+```
+
+## Standard templates
+
+```sh
+npx create-spr-app my-spr-app --default name-of-template
+```
+
+- [with-react-router](https://github.com/palash0109/Sprinklr-App-Starter-kit/tree/main/templates/with-react-router)
+- [with-graphql](https://github.com/palash0109/Sprinklr-App-Starter-kit/tree/main/templates/with-graphql)
+- [with-graphql-router](https://github.com/palash0109/Sprinklr-App-Starter-kit/tree/main/templates/with-graphql-router)
+
+## Sample webpack.custom.config.js file
+
+```js
+module.exports =
+   {
+   entry: './src/index.js',
+   module: {
+       rules: [
+            {
+              test: /\.(png|svg|jpg|jpeg|gif)$/i,
+              type: 'asset/resource',
+            }
+       ]
+   },
+   devServer: {
+	historyApiFallback: true,
+   }
+}
+```
+
+## Sample template.json file
+
+```js
+{
+   "dependencies": {
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "serve": "^11.2.0"
+   },
+   "scripts": {
+    "serve": "serve -s build",
+    "build-and-serve": "npm run build && npm run serve"
+   },
+   "eslintConfig": {
+    "extends": ["react-app", "plugin:jsx-a11y/recommended"],
+    "plugins": ["jsx-a11y"]
+   }
+}
 ```
