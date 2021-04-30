@@ -14,8 +14,8 @@ function App() {
     return (
       <ApolloProvider client={client}>
         <Switch>
-          <Route exact path="/" component={Home}></Route>
-          <Route path="/data" component={Data}></Route>
+          <Route exact path="/data" component={Data}></Route>
+          <Route path="/" component={Home}></Route>
         </Switch>
       </ApolloProvider>
     );

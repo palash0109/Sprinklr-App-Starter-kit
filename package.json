@@ -25,7 +25,6 @@
     "cross-spawn": "^7.0.3",
     "fs": "^0.0.1-security",
     "fs-extra": "^9.1.0",
-    "np": "^7.5.0",
     "path": "^0.12.7"
   },
   "devDependencies": {
