@@ -8,7 +8,12 @@ function install(dependencies)
     let args;
  
     command = 'npm';
-    args = ['install', '--save'].concat(dependencies);
+    args = [
+      'install',
+       '--save',
+       '--loglevel',
+       'error',
+      ].concat(dependencies);
 
 
     return new Promise((resolve, reject) => {
