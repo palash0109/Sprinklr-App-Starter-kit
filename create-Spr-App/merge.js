@@ -1,8 +1,11 @@
 const fs = require('fs-extra');
 const os = require('os');
 const path = require('path');
-let { dependencies } = require('./const')
+let { dependencies } = require('./constants')
 
+/* It merges template.json with the default package.json 
+   and returns the updated dependencies array and updated package.json
+ */
 
 function merge(appPath, templatePath)
 {
@@ -56,7 +59,7 @@ function merge(appPath, templatePath)
         );
       }
 
-      return dependencies;
+      return {...appPackage, dependencies};
     
 }
 

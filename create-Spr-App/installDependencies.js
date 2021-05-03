@@ -2,6 +2,7 @@ const path = require('path');
 var spawn = require('cross-spawn');
 const fs = require('fs-extra');
 
+/* It installs all the dependecies */
 function install(dependencies)
 {
     let command;

@@ -5,7 +5,7 @@ const path = require('path');
 const spawn = require('cross-spawn');
 const chalk = require('chalk')
 const { option } = require('commander');
-const { install } = require('./install')
+const { install } = require('./installDependencies')
 const { merge } = require('./merge')
 
 
@@ -133,8 +133,8 @@ async function init() {
       return;
     }
 
-    //merge the template.json with the appPackage
-    const dependencies = await merge(root, templatePath);
+    //merge the template.json with the base package.json
+    const {dependencies} = await merge(root, templatePath);
 
     process.chdir(root);
 
