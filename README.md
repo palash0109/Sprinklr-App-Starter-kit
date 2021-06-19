@@ -10,7 +10,7 @@ npm start
 ```
 
 
-## Get Started Immediately
+## Get Started Immediately!
 
 You don’t need to install or configure tools like webpack ,babel, prettier or eslint.
 
